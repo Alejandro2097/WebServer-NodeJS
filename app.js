@@ -2,9 +2,18 @@ const express = require('express')
 const app = express();
 const port = 3000
  
+
+app.set('view engine', 'hbs');
 //Midelware funcion que se ejecuta antes de hacer otra cosa.
 //Servir contenido estatico 
 app.use(express.static('public'));
+
+app.get('/', function (req, res) {
+    res.render('home', {
+        nombre: 'Alejandro Huertas',
+        titulo: 'Curso de Node'
+    });
+});
 
 app.get('/generic', function (req, res) {
     res.sendFile(__dirname + '/public/generic.html');
