@@ -1,8 +1,12 @@
-const express = require('express')
+const express = require('express');
+const hbs = require('hbs');
+require('dotenv').config();
 const app = express();
-const port = 3000
+const port = process.env.PORT;
  
 
+
+hbs.registerPartials(__dirname + '/views/partials', function (err) {});
 app.set('view engine', 'hbs');
 //Midelware funcion que se ejecuta antes de hacer otra cosa.
 //Servir contenido estatico 
@@ -16,11 +20,17 @@ app.get('/', function (req, res) {
 });
 
 app.get('/generic', function (req, res) {
-    res.sendFile(__dirname + '/public/generic.html');
+    res.render('generic', {
+        nombre: 'Alejandro Huertas ',
+        titulo: 'Curso de Node '
+    });
 });
  
 app.get('/elements', function (req, res) {
-    res.sendFile(__dirname + '/public/elements.html');
+    res.render('elements', {
+        nombre: 'Alejandro Huertas ',
+        titulo: 'Curso de Node '
+    });
 });
  
 app.get('/hola-mundo', function (req, res) {
